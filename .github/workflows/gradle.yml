@@ -11,7 +11,7 @@ on:
   push:
     branches: [ analysis ]
   pull_request:
-    branches: [ analysisi ]
+    branches: [ analysis ]
 
 permissions:
   contents: read
