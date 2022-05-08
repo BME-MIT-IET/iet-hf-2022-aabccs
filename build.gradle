@@ -73,3 +73,21 @@ dependencies {
 tasks.withType(Test) {
 	systemProperties = System.getProperties()
 }
+
+
+configurations {
+	cucumberRuntime {
+		extendsFrom testImplementation
+	}
+}
+
+task cucumber() {
+	dependsOn assemble, testClasses
+	doLast {
+		javaexec {
+			main = "io.cucumber.core.cli.Main"
+			classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+			args = ['--plugin', 'pretty', '--glue', 'hellocucumber', 'src/test/resources']
+		}
+	}
+}
