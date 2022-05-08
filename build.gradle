@@ -7,6 +7,18 @@ apply plugin: "maven"
 //	distributionUrl = "https://services.gradle.org/distributions/gradle-${gradleVersion}-all.zip"
 //}
 
+plugins {
+  id "org.sonarqube" version "3.3"
+}
+
+sonarqube {
+  properties {
+    property "sonar.projectKey", "BME-MIT-IET_iet-hf-2022-aabccs"
+    property "sonar.organization", "bme-mit-iet-org"
+    property "sonar.host.url", "https://sonarcloud.io"
+  }
+}
+
 sourceSets {
 	main {
 		java {
