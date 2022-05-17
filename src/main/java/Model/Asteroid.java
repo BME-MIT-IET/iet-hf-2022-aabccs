@@ -3,12 +3,12 @@ package Model;
 import View.AlienView;
 import View.AsteroidView;
 
-//Egy aszteroidát reprezentáló osztály
+//Egy aszteroidï¿½t reprezentï¿½lï¿½ osztï¿½ly
 public class Asteroid extends Location{
 
     private static int stat_id = 0;
 
-    //Birtoklások
+    //Birtoklï¿½sok
     private Entity EntityInside;
     private Material MaterialInside;
 
@@ -31,9 +31,9 @@ public class Asteroid extends Location{
     /**
      * Konstruktor
      *
-     * A paraméterként kapott s Model.Space-t beállítja az eltárolt Model.Space-nek (Model.Location)
+     * A paramï¿½terkï¿½nt kapott s Model.Space-t beï¿½llï¿½tja az eltï¿½rolt Model.Space-nek (Model.Location)
      *
-     * @param s erre állítja be a Model.Space-t
+     * @param s erre ï¿½llï¿½tja be a Model.Space-t
      */
     public Asteroid(Space s){
         super(s);
@@ -44,15 +44,15 @@ public class Asteroid extends Location{
 
     }
 
-    //--------------Függvények----------------------
+    //--------------Fï¿½ggvï¿½nyek----------------------
 
     /**
-     * Az aszteroida robbanását modellezõ függvény
+     * Az aszteroida robbanï¿½sï¿½t modellezï¿½ fï¿½ggvï¿½ny
      *
-     * Minden rajta tartõzkodó entitás Explode függvényét meghívja
-     * Robbanás esetén az aszteroida meghal, ezért minden szomszédjának szomszédlistájából
-     * eltávolítja magát
-     * Végül a Model.Space Model.Location listájából is eltávolítja magát
+     * Minden rajta tartï¿½zkodï¿½ entitï¿½s Explode fï¿½ggvï¿½nyï¿½t meghï¿½vja
+     * Robbanï¿½s esetï¿½n az aszteroida meghal, ezï¿½rt minden szomszï¿½djï¿½nak szomszï¿½dlistï¿½jï¿½bï¿½l
+     * eltï¿½volï¿½tja magï¿½t
+     * Vï¿½gï¿½l a Model.Space Model.Location listï¿½jï¿½bï¿½l is eltï¿½volï¿½tja magï¿½t
      */
     @Override
     public void Explode() {
@@ -68,13 +68,13 @@ public class Asteroid extends Location{
     }
 
     /**
-     * Az aszteroida fúrását modellezõ függvény
+     * Az aszteroida fï¿½rï¿½sï¿½t modellezï¿½ fï¿½ggvï¿½ny
      *
-     * Ha már nulla a kéregréteg száma, akkor nem történik semmi
-     * Egyébként pedig a rétegszám csökken eggyel
-     * Ha ezzel a fúrással lett a rétegszám nulla,
-     * akkor a nyersanyag fedetlenné válik,
-     * meghívódik a MaterialInside Exposed függvénye
+     * Ha mï¿½r nulla a kï¿½regrï¿½teg szï¿½ma, akkor nem tï¿½rtï¿½nik semmi
+     * Egyï¿½bkï¿½nt pedig a rï¿½tegszï¿½m csï¿½kken eggyel
+     * Ha ezzel a fï¿½rï¿½ssal lett a rï¿½tegszï¿½m nulla,
+     * akkor a nyersanyag fedetlennï¿½ vï¿½lik,
+     * meghï¿½vï¿½dik a MaterialInside Exposed fï¿½ggvï¿½nye
      */
     public void ReduceLayers() {
         if(NumberOfLayers <= 0){
@@ -87,14 +87,14 @@ public class Asteroid extends Location{
     }
 
     /**
-     * Egy entitás aszteroidában kibújását-elbújását modellezõ függvény
+     * Egy entitï¿½s aszteroidï¿½ban kibï¿½jï¿½sï¿½t-elbï¿½jï¿½sï¿½t modellezï¿½ fï¿½ggvï¿½ny
      *
-     * Ha az aktuális entitás az aszteroida magjában van, akkor kibújik
-     * Ha a kéregréteg száma nagyobb, mint nulla, akkor nem lehet elbújni
-     * Ha van már nyersanyag, vagy entitás a magban, nem lehet elbújni
-     * Ha nincs akadályozó tényezõ, el lehet bújni
+     * Ha az aktuï¿½lis entitï¿½s az aszteroida magjï¿½ban van, akkor kibï¿½jik
+     * Ha a kï¿½regrï¿½teg szï¿½ma nagyobb, mint nulla, akkor nem lehet elbï¿½jni
+     * Ha van mï¿½r nyersanyag, vagy entitï¿½s a magban, nem lehet elbï¿½jni
+     * Ha nincs akadï¿½lyozï¿½ tï¿½nyezï¿½, el lehet bï¿½jni
      *
-     * @param e A kibújni-elõbújni kívánó entitás
+     * @param e A kibï¿½jni-elï¿½bï¿½jni kï¿½vï¿½nï¿½ entitï¿½s
      */
     public void Hide(Entity e) {
         if(EntityInside == e){
@@ -113,15 +113,15 @@ public class Asteroid extends Location{
     }
 
     /**
-     * Az aszteroida magjába nyersanyag belehelyezését modellezõ függvény
+     * Az aszteroida magjï¿½ba nyersanyag belehelyezï¿½sï¿½t modellezï¿½ fï¿½ggvï¿½ny
      *
-     * Ha még van sziklaréteg, nem lehet beletenni a nyersanyagot, visszatérés false
-     * Ha van már nyersanyag, vagy entitás a magban, nem lehet beletenni a nyersanyagot, visszatérés false
-     * Ha nincs akadályozó tényezõ, bele lehet tenni a nyersanyagot
-     * A behelyezés után meghívódik a material exposed függvénye, visszatérés true
+     * Ha mï¿½g van sziklarï¿½teg, nem lehet beletenni a nyersanyagot, visszatï¿½rï¿½s false
+     * Ha van mï¿½r nyersanyag, vagy entitï¿½s a magban, nem lehet beletenni a nyersanyagot, visszatï¿½rï¿½s false
+     * Ha nincs akadï¿½lyozï¿½ tï¿½nyezï¿½, bele lehet tenni a nyersanyagot
+     * A behelyezï¿½s utï¿½n meghï¿½vï¿½dik a material exposed fï¿½ggvï¿½nye, visszatï¿½rï¿½s true
      *
-     * @param m Az elhelyezmi kívánt Model.Material
-     * @return A mûvelet sikerességét mutatja
+     * @param m Az elhelyezmi kï¿½vï¿½nt Model.Material
+     * @return A mï¿½velet sikeressï¿½gï¿½t mutatja
      */
     public boolean Place(Material m) {
         if(NumberOfLayers > 0){
@@ -136,15 +136,15 @@ public class Asteroid extends Location{
     }
 
     /**
-     * Az aszteroida magjában található nyersanyag kibányászását modellezõ függvény
+     * Az aszteroida magjï¿½ban talï¿½lhatï¿½ nyersanyag kibï¿½nyï¿½szï¿½sï¿½t modellezï¿½ fï¿½ggvï¿½ny
      *
-     * Ha még van sziklaréteg, nem lehet bányászni, visszatérés null értékkel (sikertelenség)
+     * Ha mï¿½g van sziklarï¿½teg, nem lehet bï¿½nyï¿½szni, visszatï¿½rï¿½s null ï¿½rtï¿½kkel (sikertelensï¿½g)
      *
-     * Ha nincs akadályozó tényezõ, lehet bányászni
-     * Kivesszük a nyersanyagot, és visszatérünk vele
-     * (ha üres volt, akkor null értékkel)
+     * Ha nincs akadï¿½lyozï¿½ tï¿½nyezï¿½, lehet bï¿½nyï¿½szni
+     * Kivesszï¿½k a nyersanyagot, ï¿½s visszatï¿½rï¿½nk vele
+     * (ha ï¿½res volt, akkor null ï¿½rtï¿½kkel)
      *
-     * @return a magban található nyersanyag
+     * @return a magban talï¿½lhatï¿½ nyersanyag
      */
     public Material MineMaterialInside() {
         if(NumberOfLayers > 0){
@@ -156,7 +156,7 @@ public class Asteroid extends Location{
     }
 
     /**
-     * A materialInside-ot frissíti null értékre
+     * A materialInside-ot frissï¿½ti null ï¿½rtï¿½kre
      */
     @Override
     public void RemoveMaterial() {
@@ -167,18 +167,18 @@ public class Asteroid extends Location{
     //Setterek
 
     /**
-     * Az entityInside-ot frissíti a paraméterként kapott Entitásra (Setter)
+     * Az entityInside-ot frissï¿½ti a paramï¿½terkï¿½nt kapott Entitï¿½sra (Setter)
      *
-     * @param entityInside erre állítja be az EntityInside-ot
+     * @param entityInside erre ï¿½llï¿½tja be az EntityInside-ot
      */
     public void setEntityInside(Entity entityInside) {
         EntityInside = entityInside;
     }
 
     /**
-     * A materialInside-ot frissíti a paraméterként kapott Materialra (Setter)
+     * A materialInside-ot frissï¿½ti a paramï¿½terkï¿½nt kapott Materialra (Setter)
      *
-     * @param m erre frissíti a MaterialInside-ot
+     * @param m erre frissï¿½ti a MaterialInside-ot
      */
     public void SetMaterialInside(Material m) {
         MaterialInside = m;

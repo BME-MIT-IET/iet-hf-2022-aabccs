@@ -5,9 +5,12 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
-public class asteroid {
+
+public class UnitTest {
+
+
     @Test
-    void teleport(){
+    void TestTeleportSuccess(){
         TeleportGate tg1 = new TeleportGate();
         TeleportGate tg2 = new TeleportGate();
 
