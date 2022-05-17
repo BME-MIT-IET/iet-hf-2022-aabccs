@@ -1,32 +1,43 @@
 import Model.*;
+import Model.Robot;
 import View.ViewController;
 import org.junit.jupiter.api.Test;
 
 
+import java.awt.*;
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 
 public class UnitTest {
 
-
     @Test
-    void TestTeleportSuccess(){
-        TeleportGate tg1 = new TeleportGate();
-        TeleportGate tg2 = new TeleportGate();
+    void TestSetNeighbours(){
+        Game g = new Game();
+        ViewController v = new ViewController();
 
-        tg1.SetPair(tg2);
-        tg1.SetActive();
-        tg2.SetPair(tg1);
-        tg2.SetActive();
+        g.setViewController(v);
+        v.setGame(g);
+        Space s = new Space(g);
 
-        Settler s = new Settler(tg1);
-        s.Teleport();
+        Asteroid a1 = new Asteroid(s);
+        Asteroid a2 = new Asteroid(s);
+        Asteroid a3 = new Asteroid(s);
 
-        assertEquals(tg2,s.getLocation());
-        assertNotEquals(tg1,s.getLocation());
-        assertNotEquals(tg1, tg2);
+        a1.setCoordinate(new Point(10, 10));
+        a2.setCoordinate(new Point(11, 11));
+        a3.setCoordinate(new Point(1000, 1000));
+
+        s.SetNeighbours();
+
+        assertTrue(a1.GetNeighbours().contains(a2));
+        assertTrue(a2.GetNeighbours().contains(a1));
+
+        assertFalse(a1.GetNeighbours().contains(a3));
+        assertFalse(a2.GetNeighbours().contains(a3));
+
     }
 
     @Test
@@ -51,6 +62,61 @@ public class UnitTest {
 
     }
 
+    @Test
+    void TestNoNeighbour(){
+        Game g = new Game();
+        ViewController v = new ViewController();
+
+        g.setViewController(v);
+        v.setGame(g);
+        Space s = new Space(g);
+
+        Asteroid a1 = new Asteroid(s);
+        Asteroid a2 = new Asteroid(s);
+
+        Settler settler = new Settler(a1, g);
+
+        a1.setCoordinate(new Point(10, 10));
+        a2.setCoordinate(new Point(1000, 1000));
+
+        s.SetNeighbours();
+
+        settler.Move(a2);
+
+        assertNotEquals(a2, settler.getLocation());
+        assertEquals(a1, settler.getLocation());
+
+    }
+
+    @Test
+    void TestTeleportSuccess(){
+        TeleportGate tg1 = new TeleportGate();
+        TeleportGate tg2 = new TeleportGate();
+
+        tg1.SetPair(tg2);
+        tg1.SetActive();
+        tg2.SetPair(tg1);
+        tg2.SetActive();
+
+        Settler s = new Settler(tg1);
+        s.Teleport();
+
+        assertEquals(tg2,s.getLocation());
+        assertNotEquals(tg1,s.getLocation());
+        assertNotEquals(tg1, tg2);
+    }
+
+    @Test
+    void TestTeleportFail(){
+        TeleportGate tg1 = new TeleportGate();
+
+        tg1.SetActive();
+
+        Settler s = new Settler(tg1);
+        s.Teleport();
+
+        assertEquals(tg1,s.getLocation());
+    }
 
     @Test
     void TestWin(){
@@ -99,6 +165,21 @@ public class UnitTest {
     }
 
     @Test
+    void TestMineSuccessful(){
+        Asteroid a1 = new Asteroid();
+        a1.setNumberOfLayers(0);
+        Iron iron = new Iron();
+        a1.SetMaterialInside(iron);
+
+        Settler settler = new Settler(a1);
+
+        settler.Mine();
+
+        assertEquals(iron, settler.getInventory().get(0));
+
+    }
+
+    @Test
     void TestNoSpaceInInventory(){
 
         Asteroid a = new Asteroid();
@@ -120,6 +201,18 @@ public class UnitTest {
     }
 
     @Test
+    void TestAsteroidIsEmpty(){
+        Asteroid a1 = new Asteroid();
+        a1.setNumberOfLayers(0);
+
+        Settler settler = new Settler(a1);
+
+        settler.Mine();
+
+        assertTrue(settler.getInventory().isEmpty());
+    }
+
+    @Test
     void TestMineOnTeleportGate(){
 
         TeleportGate t = new TeleportGate();
@@ -129,6 +222,20 @@ public class UnitTest {
 
         assertTrue(s.getInventory().isEmpty());
 
+    }
+
+    @Test
+    void TestMineButLayerGreaterThanZero(){
+        Asteroid a1 = new Asteroid();
+        Iron iron = new Iron();
+        a1.SetMaterialInside(iron);
+        a1.setNumberOfLayers(2);
+
+        Settler settler = new Settler(a1);
+
+        settler.Mine();
+
+        assertFalse(settler.getInventory().contains(iron));
     }
 
     @Test
@@ -168,6 +275,17 @@ public class UnitTest {
     }
 
     @Test
+    void TestSettlerCanNotBuildTeleportGate (){
+        Asteroid a1 = new Asteroid();
+        a1.setNumberOfLayers(0);
+
+        Settler settler = new Settler(a1);
+        settler.BuildTeleportGate();
+
+        assertTrue(settler.GetTeleportGate().isEmpty());
+    }
+
+    @Test
     void TestSettlerCanBuildRobot(){
 
         Iron i = new Iron();
@@ -198,6 +316,26 @@ public class UnitTest {
     }
 
     @Test
+    void TestSettlerCanNotBuildRobot(){
+
+        Game g = new Game();
+        ViewController v = new ViewController();
+        g.setViewController(v);
+        v.setGame(g);
+        Space sp = new Space(g);
+        g.AddSpace(sp);
+        Asteroid a = new Asteroid(sp);
+
+        Settler s = new Settler(a, g);
+        g.AddSettler(s);
+
+        s.BuildRobot();
+
+        assertEquals(0, g.getRobotsAlive().size());
+        assertEquals( 1, a.getEntitiesOnSurface().size());
+    }
+
+    @Test
     void TestHideSuccess(){
 
         Asteroid a = new Asteroid();
@@ -211,6 +349,20 @@ public class UnitTest {
         assertFalse(a.getEntitiesOnSurface().contains(s));
 
 
+
+    }
+
+    @Test
+    void TestHideFailNumberOfLayersGreaterThanZero(){
+        Asteroid a = new Asteroid();
+        a.setNumberOfLayers(1);
+
+        Settler s = new Settler(a);
+
+        s.Hide();
+
+        assertNotEquals(s, a.GetEntityInside());
+        assertTrue(a.getEntitiesOnSurface().contains(s));
 
     }
 
@@ -234,6 +386,25 @@ public class UnitTest {
     }
 
     @Test
+    void TestComingOut(){
+        Asteroid a = new Asteroid();
+        a.setNumberOfLayers(0);
+
+        Settler s = new Settler(a);
+
+        s.Hide();
+
+        assertEquals(s, a.GetEntityInside());
+        assertFalse(a.getEntitiesOnSurface().contains(s));
+
+        s.Hide();
+
+        assertNotEquals(s, a.GetEntityInside());
+        assertTrue(a.getEntitiesOnSurface().contains(s));
+
+    }
+
+    @Test
     void TestPlaceMaterialSuccess(){
 
         Asteroid a = new Asteroid();
@@ -246,6 +417,22 @@ public class UnitTest {
         assertEquals(i, a.GetMaterial());
         assertFalse(s.getInventory().contains(i));
 
+
+
+    }
+
+    @Test
+    void TestPlaceMaterialFailNumberOfLayersGreaterThanZero(){
+
+        Iron i = new Iron();
+        Asteroid a = new Asteroid();
+        a.setNumberOfLayers(2);
+        Settler s = new Settler(a);
+        s.AddMaterial(i);
+        s.PlaceMaterial(i);
+
+        assertNotEquals(i, a.GetMaterial());
+        assertTrue(s.getInventory().contains(i));
 
 
     }
@@ -266,6 +453,20 @@ public class UnitTest {
         assertTrue(s.getInventory().contains(i2));
         assertFalse(s.getInventory().contains(i1));
 
+
+    }
+
+    @Test
+    void TestPlaceMaterialFailNotOnAsteroid(){
+
+        Iron i = new Iron();
+        TeleportGate tg = new TeleportGate();
+        Settler s = new Settler(tg);
+        s.AddMaterial(i);
+        s.PlaceMaterial(i);
+
+        assertNotEquals(i, tg.GetMaterial());
+        assertTrue(s.getInventory().contains(i));
 
     }
 
@@ -291,6 +492,22 @@ public class UnitTest {
         assertFalse(s.GetTeleportGate().contains(tg));
 
     }
+
+    @Test
+    void TestDrillIsPossible(){
+
+        Asteroid a = new Asteroid();
+        a.setNumberOfLayers(2);
+        Settler s = new Settler(a);
+
+        s.Drill();
+
+        assertTrue(a.getNumberOfLayers() < 2);
+        assertEquals(1, a.getNumberOfLayers() );
+
+
+    }
+
     @Test
     void TestDrillButNumberOfLayersEqualsZero(){
 
@@ -307,6 +524,22 @@ public class UnitTest {
     }
 
     @Test
+    void TestDrillAndMaterialExposed(){
+        Uran u = new Uran();
+        u.SetCounter(0);
+        Asteroid a = new Asteroid();
+        a.setNearSun(true);
+        a.setNumberOfLayers(1);
+        a.SetMaterialInside(u);
+        Settler s = new Settler(a);
+
+        s.Drill();
+
+        assertTrue(u.GetCounter() > 0);
+        assertEquals(1, u.GetCounter());
+    }
+
+    @Test
     void TestDrillOnTeleportGate(){
 
         TeleportGate tg = new TeleportGate();
@@ -317,6 +550,92 @@ public class UnitTest {
         s.Drill();
 
         assertEquals(layerCount, tg.getNumberOfLayers());
+
+
+    }
+
+    @Test
+    void TestWaterSublimes(){
+        Water w = new Water();
+        Asteroid a = new Asteroid();
+        a.setNearSun(true);
+        a.setNumberOfLayers(1);
+        a.SetMaterialInside(w);
+        Settler s = new Settler(a);
+
+        s.Drill();
+
+        assertFalse(a.GetMaterial() == w);
+    }
+
+    @Test
+    void TestUranExplodes(){
+        Game g = new Game();
+        ViewController v = new ViewController();
+        g.setViewController(v);
+        v.setGame(g);
+
+        Space s = new Space(g);
+        g.AddSpace(s);
+
+        Uran u = new Uran();
+        u.SetCounter(2);
+
+        Asteroid a = new Asteroid();
+        Settler settler = new Settler(a);
+
+        settler.Drill();
+
+        assertFalse(s.GetActiveLocations().contains(a));
+        assertFalse(g.getSettlersAlive().contains(s));
+    }
+
+    @Test
+    void TestRobotExplodes(){
+        Game g = new Game();
+        ViewController v = new ViewController();
+        g.setViewController(v);
+        v.setGame(g);
+
+        Space s = new Space(g);
+        g.AddSpace(s);
+
+        Asteroid a1 = new Asteroid(s);
+        a1.setCoordinate(new Point(10, 10));
+        Asteroid a2 = new Asteroid(s);
+        a2.setCoordinate(new Point(11, 11));
+
+        s.SetNeighbours();
+
+        Robot r = new Robot(a1, g);
+
+        g.AddRobot(r);
+        r.Explode();
+
+        assertTrue(g.getRobotsAlive().contains(r));
+        assertTrue(a2.getEntitiesOnSurface().contains(r));
+        assertFalse(a1.getEntitiesOnSurface().contains(r));
+    }
+
+    @Test
+    void TestRobotExplodesNoNeighbour(){
+
+        Game g = new Game();
+        ViewController v = new ViewController();
+        g.setViewController(v);
+        v.setGame(g);
+
+        Space s = new Space(g);
+        g.AddSpace(s);
+
+        Asteroid a = new Asteroid(s);
+        Robot r = new Robot(a, g);
+
+        g.AddRobot(r);
+        r.Explode();
+
+        assertFalse(g.getRobotsAlive().contains(r));
+
 
 
     }
@@ -353,29 +672,6 @@ public class UnitTest {
     }
 
     @Test
-    void TestRobotExplodesNoNeighbour(){
-
-        Game g = new Game();
-        ViewController v = new ViewController();
-        g.setViewController(v);
-        v.setGame(g);
-
-        Space s = new Space(g);
-        g.AddSpace(s);
-
-        Asteroid a = new Asteroid(s);
-        Robot r = new Robot(a, g);
-
-        g.AddRobot(r);
-        r.Explode();
-
-        assertFalse(g.getRobotsAlive().contains(r));
-
-
-
-    }
-
-    @Test
     void TestSunStorm(){
 
         Game g = new Game();
@@ -406,6 +702,29 @@ public class UnitTest {
         assertFalse(a.getEntitiesOnSurface().contains(r));
 
 
+    }
+
+    @Test
+    void TestNotLastSettlerDies(){
+        Game g = new Game();
+        ViewController v = new ViewController();
+        g.setViewController(v);
+        v.setGame(g);
+
+        Space sp = new Space(g);
+        g.AddSpace(sp);
+
+        Asteroid a = new Asteroid(sp);
+        Settler s1 = new Settler(a, g);
+        Settler s2 = new Settler(a, g);
+
+        g.AddSettler(s1);
+        g.AddSettler(s2);
+        s1.Die();
+
+        assertFalse(g.getSettlersAlive().contains(s1));
+        assertTrue(g.getSettlersAlive().contains(s2));
+        assertFalse(g.isWin());
     }
 
     @Test
@@ -449,6 +768,5 @@ public class UnitTest {
         assertFalse(a.getEntitiesOnSurface().contains(r));
 
     }
-
 
 }
