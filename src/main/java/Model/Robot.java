@@ -6,7 +6,7 @@ import View.RobotView;
 import java.util.ArrayList;
 import java.util.Random;
 
-//A játékbeli robotot, mint entitást reprezentáló függvény
+//A jï¿½tï¿½kbeli robotot, mint entitï¿½st reprezentï¿½lï¿½ fï¿½ggvï¿½ny
 public class Robot extends Entity{
 
     private RobotView robotView;
@@ -16,22 +16,28 @@ public class Robot extends Entity{
     /**
      * Konstruktor
      *
-     * @param l beállítja Model.Location-nek
+     * @param l beï¿½llï¿½tja Model.Location-nek
      */
     public Robot(Location l){
         super(l);
         robotView = new RobotView(this);
     }
+
+    public Robot(Location l, Game g){
+        super(l);
+        Game = g;
+        robotView = new RobotView(this);
+    }
     
-    //--------------Függvények----------------------
+    //--------------Fï¿½ggvï¿½nyek----------------------
 
     /**
-     * A robot lépését reprezentáló függvény
+     * A robot lï¿½pï¿½sï¿½t reprezentï¿½lï¿½ fï¿½ggvï¿½ny
      *
-     * Ha hamarosan SunStorm lesz, akkor elbújik
-     * Különben ha tud még fúrni az adott Model.Location-ön, akkor fúr
-     * Ha nem tud, akkor pedig továbbláp a Model.Location valamelyik szomszédjára,
-     * ha a Locationnek már nincs szomszédja, akkor meghal
+     * Ha hamarosan SunStorm lesz, akkor elbï¿½jik
+     * Kï¿½lï¿½nben ha tud mï¿½g fï¿½rni az adott Model.Location-ï¿½n, akkor fï¿½r
+     * Ha nem tud, akkor pedig tovï¿½bblï¿½p a Model.Location valamelyik szomszï¿½djï¿½ra,
+     * ha a Locationnek mï¿½r nincs szomszï¿½dja, akkor meghal
      */
     @Override
     public void Step() {
@@ -55,7 +61,7 @@ public class Robot extends Entity{
     }
 
     /**
-     * A robot halálát reprezentáló függvény
+     * A robot halï¿½lï¿½t reprezentï¿½lï¿½ fï¿½ggvï¿½ny
      */
     @Override
     public void Die() {
@@ -64,10 +70,10 @@ public class Robot extends Entity{
     }
 
     /**
-     * A robotot elérõ robbanás hatását reprezentáló függvény
+     * A robotot elï¿½rï¿½ robbanï¿½s hatï¿½sï¿½t reprezentï¿½lï¿½ fï¿½ggvï¿½ny
      *
-     * Ha nincs az aktuális Model.Location-nek szomszédja, meghal
-     * Egyébként egy szomszédra kerül át
+     * Ha nincs az aktuï¿½lis Model.Location-nek szomszï¿½dja, meghal
+     * Egyï¿½bkï¿½nt egy szomszï¿½dra kerï¿½l ï¿½t
      */
     @Override
     public void Explode() {

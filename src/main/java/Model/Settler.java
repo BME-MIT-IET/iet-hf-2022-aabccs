@@ -5,12 +5,12 @@ import View.SettlerView;
 
 import java.util.ArrayList;
 
-//A játékos által irányítható telepest reprezentáló osztály
+//A jï¿½tï¿½kos ï¿½ltal irï¿½nyï¿½thatï¿½ telepest reprezentï¿½lï¿½ osztï¿½ly
 public class Settler extends Entity {
 
     private static int stat_id = 0;
 
-    //Tárolt objektumok
+    //Tï¿½rolt objektumok
     private ArrayList<TeleportGate> TeleportGateList;
     private Recipe RobotRecipe;
     private Recipe TeleportGateRecipe;
@@ -23,9 +23,9 @@ public class Settler extends Entity {
 
     /**
      * Konstruktor,
-     * beállítja a tárolt objektumokat
+     * beï¿½llï¿½tja a tï¿½rolt objektumokat
      *
-     * @param l beállítja Model.Location-nek
+     * @param l beï¿½llï¿½tja Model.Location-nek
      */
     public Settler(Location l){
         super(l);
@@ -42,11 +42,27 @@ public class Settler extends Entity {
         stat_id++;
     }
 
+    public Settler(Location l, Game g){
+        super(l);
+        Game=g;
+        TeleportGateList = new ArrayList<TeleportGate>();
 
-    //--------------Függvények----------------------
+        RobotRecipe = new Recipe();
+        RobotRecipe.SetToRobot();
+
+        TeleportGateRecipe = new Recipe();
+        TeleportGateRecipe.SetToTeleportGate();
+
+        settlerView = new SettlerView(this);
+        id = stat_id;
+        stat_id++;
+    }
+
+
+    //--------------Fï¿½ggvï¿½nyek----------------------
 
     /**
-     * A telepes lépését reprezentáló függvény
+     * A telepes lï¿½pï¿½sï¿½t reprezentï¿½lï¿½ fï¿½ggvï¿½ny
      */
     @Override
     public void Step() {
@@ -62,7 +78,7 @@ public class Settler extends Entity {
     }
 
     /**
-     * A telepes halálát reprezentáló függvény
+     * A telepes halï¿½lï¿½t reprezentï¿½lï¿½ fï¿½ggvï¿½ny
      */
     @Override
     public void Die() {
@@ -71,7 +87,7 @@ public class Settler extends Entity {
     }
 
     /**
-     * A telepes felrobbanását reprezentáló függvény
+     * A telepes felrobbanï¿½sï¿½t reprezentï¿½lï¿½ fï¿½ggvï¿½ny
      */
     @Override
     public void Explode() {
@@ -79,14 +95,14 @@ public class Settler extends Entity {
     }
 
     /**
-     * A telepes bányászását reprezentáló függvény
+     * A telepes bï¿½nyï¿½szï¿½sï¿½t reprezentï¿½lï¿½ fï¿½ggvï¿½ny
      *
-     * Ha tele van az inventory, a bányászás nem sikerült
-     * Ha az aktuális Model.Location magjában nincs nyersanyag,
-     * vagy van még kéregréteg, a bányászás nem sikerült
-     * Különben pedig megtörténik a bányászás,
-     * a Model.Location-bõl eltávolítja a Materialt
-     * a Model.Settler inventory-jához pedig hozzáadja
+     * Ha tele van az inventory, a bï¿½nyï¿½szï¿½s nem sikerï¿½lt
+     * Ha az aktuï¿½lis Model.Location magjï¿½ban nincs nyersanyag,
+     * vagy van mï¿½g kï¿½regrï¿½teg, a bï¿½nyï¿½szï¿½s nem sikerï¿½lt
+     * Kï¿½lï¿½nben pedig megtï¿½rtï¿½nik a bï¿½nyï¿½szï¿½s,
+     * a Model.Location-bï¿½l eltï¿½volï¿½tja a Materialt
+     * a Model.Settler inventory-jï¿½hoz pedig hozzï¿½adja
      */
     public void Mine(){
         if(!CheckInventorySum()){
@@ -100,27 +116,27 @@ public class Settler extends Entity {
     }
 
     /**
-     * Robot építését reprezentáló függvény
+     * Robot ï¿½pï¿½tï¿½sï¿½t reprezentï¿½lï¿½ fï¿½ggvï¿½ny
      *
-     * Ha minden nyersanyag megvan, azok eltûnnek
-     * és az aktuális aszteroidán létrejön egy robot
-     * Különben sikertelen az építés
+     * Ha minden nyersanyag megvan, azok eltï¿½nnek
+     * ï¿½s az aktuï¿½lis aszteroidï¿½n lï¿½trejï¿½n egy robot
+     * Kï¿½lï¿½nben sikertelen az ï¿½pï¿½tï¿½s
      */
     public void BuildRobot(){
         if(RobotRecipe.HasEverything(Materials)){
             Materials = RobotRecipe.UpdateInventory(Materials);
             Robot r = new Robot(location);
-            location.AddEntity(r);
+            //location.AddEntity(r);
             Game.AddRobot(r);
         }
     }
 
     /**
-     * Teleportkapu építését reprezentáló függvény
+     * Teleportkapu ï¿½pï¿½tï¿½sï¿½t reprezentï¿½lï¿½ fï¿½ggvï¿½ny
      *
-     * Ha nincs hely az inventoryban, az építés sikertelen
-     * Ha minden nyersanyag megvan, azok létrejönnek
-     * és a telepes eszköztárában létrejön egy teleportkapu-pár
+     * Ha nincs hely az inventoryban, az ï¿½pï¿½tï¿½s sikertelen
+     * Ha minden nyersanyag megvan, azok lï¿½trejï¿½nnek
+     * ï¿½s a telepes eszkï¿½ztï¿½rï¿½ban lï¿½trejï¿½n egy teleportkapu-pï¿½r
      */
     public void BuildTeleportGate(){
         if(TeleportGateList.size() > 1 || !CheckInventorySum()){
@@ -140,12 +156,12 @@ public class Settler extends Entity {
     }
 
     /**
-     * Teleportkapu lehelyezését reprezentáló függvény
+     * Teleportkapu lehelyezï¿½sï¿½t reprezentï¿½lï¿½ fï¿½ggvï¿½ny
      *
-     * Meghívja a teleportkapu Place függvényét, paraméterként
-     * az aktuális Model.Location-t átadva
+     * Meghï¿½vja a teleportkapu Place fï¿½ggvï¿½nyï¿½t, paramï¿½terkï¿½nt
+     * az aktuï¿½lis Model.Location-t ï¿½tadva
      *
-     * @param tp a lehelyezni kívánt TeleportGate
+     * @param tp a lehelyezni kï¿½vï¿½nt TeleportGate
      */
     public void PlaceTeleportGate(TeleportGate tp){
         tp.Place(location);
@@ -153,12 +169,12 @@ public class Settler extends Entity {
     }
 
     /**
-     * Nyersanyag aszteroidába helyezését reprezentáló függvény
+     * Nyersanyag aszteroidï¿½ba helyezï¿½sï¿½t reprezentï¿½lï¿½ fï¿½ggvï¿½ny
      *
-     * Meghívja a nyersanyag Place függvényét, paraméterként
-     * az aktuális Model.Location-t átadva
+     * Meghï¿½vja a nyersanyag Place fï¿½ggvï¿½nyï¿½t, paramï¿½terkï¿½nt
+     * az aktuï¿½lis Model.Location-t ï¿½tadva
      *
-     * @param m a lehelyezni kívánt Model.Material
+     * @param m a lehelyezni kï¿½vï¿½nt Model.Material
      */
     public void PlaceMaterial(Material m){
         if(m.Place(location)){
@@ -168,53 +184,53 @@ public class Settler extends Entity {
     }
 
     /**
-     * Az eszköztár méretét ellenõrzõ függvény
+     * Az eszkï¿½ztï¿½r mï¿½retï¿½t ellenï¿½rzï¿½ fï¿½ggvï¿½ny
      *
-     * @return felvehetõ-e a nyersanyag (true), vagy sem (false)
+     * @return felvehetï¿½-e a nyersanyag (true), vagy sem (false)
      */
     public boolean CheckInventorySum(){
         return Materials.size() < 10;
     }
 
     /**
-     * A telepes teleportálását reprezentáló függvény
-     * Meghívja az aktuális Model.Location teleport függvényét
+     * A telepes teleportï¿½lï¿½sï¿½t reprezentï¿½lï¿½ fï¿½ggvï¿½ny
+     * Meghï¿½vja az aktuï¿½lis Model.Location teleport fï¿½ggvï¿½nyï¿½t
      */
     public void Teleport(){
         location.Teleport(this);
     }
 
     /**
-     * Eltávolítja a paraméterként kapott m Materialt a telepes inventory-jából
+     * Eltï¿½volï¿½tja a paramï¿½terkï¿½nt kapott m Materialt a telepes inventory-jï¿½bï¿½l
      *
-     * @param m eltávolítja a telepes inventory-jából
+     * @param m eltï¿½volï¿½tja a telepes inventory-jï¿½bï¿½l
      */
     public void RemoveMaterial(Material m) {
         Materials.remove(m);
     }
 
     /**
-     * Eltávolítja a paraméterként kapott t TeleportGate-t a telepes inventory-jából
+     * Eltï¿½volï¿½tja a paramï¿½terkï¿½nt kapott t TeleportGate-t a telepes inventory-jï¿½bï¿½l
      *
-     * @param t eltávolítja a telepes inventory-jából
+     * @param t eltï¿½volï¿½tja a telepes inventory-jï¿½bï¿½l
      */
     public void RemoveTeleportGate(TeleportGate t) {
         TeleportGateList.remove(t);
     }
 
     /**
-     *  Felveszi a paraméterként kapott m Materialt a telepes inventory-jába
+     *  Felveszi a paramï¿½terkï¿½nt kapott m Materialt a telepes inventory-jï¿½ba
      *
-     * @param m hozzáadja a telepes inventory-jához
+     * @param m hozzï¿½adja a telepes inventory-jï¿½hoz
      */
     public void AddMaterial(Material m){
         Materials.add(m);
     }
 
     /**
-     * Felveszi a paraméterként kapott t TeleportGate-t a telepes inventory-jába
+     * Felveszi a paramï¿½terkï¿½nt kapott t TeleportGate-t a telepes inventory-jï¿½ba
      *
-     * @param t hozzáadja a telepes inventory-jához
+     * @param t hozzï¿½adja a telepes inventory-jï¿½hoz
      */
     public void AddTeleportGate(TeleportGate t){
         TeleportGateList.add(t);

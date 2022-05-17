@@ -6,18 +6,18 @@ import View.ViewController;
 import java.util.ArrayList;
 import java.util.Random;
 
-//A játékmenetet kezelõ Game osztály
+//A jï¿½tï¿½kmenetet kezelï¿½ Game osztï¿½ly
 public class Game {
 
     Control control;
     ViewController viewController;
 
-    //Tulajdonságok
+    //Tulajdonsï¿½gok
     private boolean Win;
     private boolean Active;
     private Settler currentSettler = null;
 
-    //Tárolt objektumok
+    //Tï¿½rolt objektumok
     private Space Space;
     private ArrayList<Settler> SettlersAlive;
     private ArrayList<Robot> RobotsAlive;
@@ -31,7 +31,7 @@ public class Game {
     /**
      * Konstruktor
      *
-     * Beállítja alap értékre a tulajdonságokat és tárolt objektumokat
+     * Beï¿½llï¿½tja alap ï¿½rtï¿½kre a tulajdonsï¿½gokat ï¿½s tï¿½rolt objektumokat
      */
     public Game(){
         Space = new Space(this);
@@ -47,16 +47,16 @@ public class Game {
 
     }
 
-    //--------------Függvények----------------------
+    //--------------Fï¿½ggvï¿½nyek----------------------
 
     /**
-     * A játékot elindító függvény
+     * A jï¿½tï¿½kot elindï¿½tï¿½ fï¿½ggvï¿½ny
      *
-     * Létrehozza a Model.Space-t, az Aszterodiákat
-     * beállítja a szomszédságokat
-     * Létrehozza a Model.Settler-eket, illetve az Alieneket
+     * Lï¿½trehozza a Model.Space-t, az Aszterodiï¿½kat
+     * beï¿½llï¿½tja a szomszï¿½dsï¿½gokat
+     * Lï¿½trehozza a Model.Settler-eket, illetve az Alieneket
      *
-     * @param numPlayers a játékosok számát adja meg
+     * @param numPlayers a jï¿½tï¿½kosok szï¿½mï¿½t adja meg
      */
     public void StartGame(int numPlayers){
         Space = new Space(this);
@@ -113,16 +113,16 @@ public class Game {
     }
 
     /**
-     * A játékot lezáró függvény
+     * A jï¿½tï¿½kot lezï¿½rï¿½ fï¿½ggvï¿½ny
      */
     public void EndGame(){
         SetActive(false);
     }
 
     /**
-     * Hozzáadja a robotok listájához a paraméterként kapott r robotot
+     * Hozzï¿½adja a robotok listï¿½jï¿½hoz a paramï¿½terkï¿½nt kapott r robotot
      *
-     * @param r hozzáadja a robotok listájához
+     * @param r hozzï¿½adja a robotok listï¿½jï¿½hoz
      */
     public void AddRobot(Robot r){
         r.setGame(this);
@@ -131,9 +131,9 @@ public class Game {
     }
 
     /**
-     * Hozzáadja a telepesek listájához a paraméterként kapott s Model.Settler-t
+     * Hozzï¿½adja a telepesek listï¿½jï¿½hoz a paramï¿½terkï¿½nt kapott s Model.Settler-t
      *
-     * @param s hozzáadja a settlerek listájához
+     * @param s hozzï¿½adja a settlerek listï¿½jï¿½hoz
      */
     public void AddSettler(Settler s){
         s.setGame(this);
@@ -142,9 +142,9 @@ public class Game {
     }
 
     /**
-     * Hozzáadja az ûrlények listájához a paraméterként kapott a Alien-t
+     * Hozzï¿½adja az ï¿½rlï¿½nyek listï¿½jï¿½hoz a paramï¿½terkï¿½nt kapott a Alien-t
      *
-     * @param a hozzáadja az alienek listájához
+     * @param a hozzï¿½adja az alienek listï¿½jï¿½hoz
      */
     public void AddAlien(Alien a){
         a.setGame(this);
@@ -153,9 +153,9 @@ public class Game {
     }
 
     /**
-     * Eltávolítja a robotok listájáról a paraméterként kapott r robotot
+     * Eltï¿½volï¿½tja a robotok listï¿½jï¿½rï¿½l a paramï¿½terkï¿½nt kapott r robotot
      *
-     * @param r eltávolítja a robotok listájából
+     * @param r eltï¿½volï¿½tja a robotok listï¿½jï¿½bï¿½l
      */
     public void RemoveRobot(Robot r){
         RobotsAlive.remove(r);
@@ -163,10 +163,10 @@ public class Game {
     }
 
     /**
-     * Eltávolítja a telepesek listájáról a paraméterként kapott s Settlert
-     * ha az utolsó telepest távolítja el, akkor a játék véget ér
+     * Eltï¿½volï¿½tja a telepesek listï¿½jï¿½rï¿½l a paramï¿½terkï¿½nt kapott s Settlert
+     * ha az utolsï¿½ telepest tï¿½volï¿½tja el, akkor a jï¿½tï¿½k vï¿½get ï¿½r
      *
-     * @param s eltávolítja a settlerek listájából
+     * @param s eltï¿½volï¿½tja a settlerek listï¿½jï¿½bï¿½l
      */
     public void RemoveSettler(Settler s){
         SettlersAlive.remove(s);
@@ -178,9 +178,9 @@ public class Game {
     }
 
     /**
-     * Eltávolítja az alienek listájáról a paraméterként kapott a Alient
+     * Eltï¿½volï¿½tja az alienek listï¿½jï¿½rï¿½l a paramï¿½terkï¿½nt kapott a Alient
      *
-     * @param a eltávolítja az alienek listájából
+     * @param a eltï¿½volï¿½tja az alienek listï¿½jï¿½bï¿½l
      */
     public void RemoveAlien(Alien a){
         AliensAlive.remove(a);
@@ -188,7 +188,7 @@ public class Game {
     }
 
     /**
-     * A játék futásáért felelõs függvény
+     * A jï¿½tï¿½k futï¿½sï¿½ï¿½rt felelï¿½s fï¿½ggvï¿½ny
      */
     public void GameLoop(){
         viewController.DrawAll();
@@ -228,11 +228,11 @@ public class Game {
     }
 
     /**
-     * Ellenõrzi, hogy a paraméterként kapott nyersanyagok
-     * teljesítik-e a nyerés feltételét
-     * Ha igen, beállítja a megfelelõ változókat a megfelelõ értékekre
+     * Ellenï¿½rzi, hogy a paramï¿½terkï¿½nt kapott nyersanyagok
+     * teljesï¿½tik-e a nyerï¿½s feltï¿½telï¿½t
+     * Ha igen, beï¿½llï¿½tja a megfelelï¿½ vï¿½ltozï¿½kat a megfelelï¿½ ï¿½rtï¿½kekre
      *
-     * @param materials material-ok listája, melyet ellenõriz, hogy elég-e a nyeréshez
+     * @param materials material-ok listï¿½ja, melyet ellenï¿½riz, hogy elï¿½g-e a nyerï¿½shez
      */
     public void CheckWin(ArrayList<Material> materials){
         if (winRecipe.HasEverything(materials)){
@@ -244,27 +244,27 @@ public class Game {
     //-------Setterek & Getterek-----------\\
 
     /**
-     * A paraméterként kapott s Model.Space-t eltárolja
+     * A paramï¿½terkï¿½nt kapott s Model.Space-t eltï¿½rolja
      *
-     * @param s beállítja a Model.Space-t
+     * @param s beï¿½llï¿½tja a Model.Space-t
      */
     public void AddSpace(Space s){
         Space = s;
     }
 
     /**
-     * A paraméterként kapott értékre állítja a Win változót (Setter)
+     * A paramï¿½terkï¿½nt kapott ï¿½rtï¿½kre ï¿½llï¿½tja a Win vï¿½ltozï¿½t (Setter)
      *
-     * @param w beállítja erre a Win-t
+     * @param w beï¿½llï¿½tja erre a Win-t
      */
     public void SetWin(boolean w){
         Win = w;
     }
 
     /**
-     * A paraméterként kapott értékre állítja az Active változót (Setter)
+     * A paramï¿½terkï¿½nt kapott ï¿½rtï¿½kre ï¿½llï¿½tja az Active vï¿½ltozï¿½t (Setter)
      *
-     * @param a beállítja az Active értékét
+     * @param a beï¿½llï¿½tja az Active ï¿½rtï¿½kï¿½t
      */
     public void SetActive(boolean a){
         Active = a;
@@ -273,7 +273,7 @@ public class Game {
     /**
      * Getter
      *
-     * @return visszaadja a Win értékét
+     * @return visszaadja a Win ï¿½rtï¿½kï¿½t
      */
     public boolean isWin() {
         return Win;
@@ -282,7 +282,7 @@ public class Game {
     /**
      * Getter
      *
-     * @return visszaadja az Active értékét
+     * @return visszaadja az Active ï¿½rtï¿½kï¿½t
      */
     public boolean isActive() {
         return Active;
@@ -300,7 +300,7 @@ public class Game {
     /**
      * Getter
      *
-     * @return visszaadja az életben levõ settlerek listáját
+     * @return visszaadja az ï¿½letben levï¿½ settlerek listï¿½jï¿½t
      */
     public ArrayList<Settler> getSettlersAlive() {
         return SettlersAlive;
@@ -313,7 +313,7 @@ public class Game {
     /**
      * Getter
      *
-     * @return visszaadja az életben levõ robotok listáját
+     * @return visszaadja az ï¿½letben levï¿½ robotok listï¿½jï¿½t
      */
     public ArrayList<Robot> getRobotsAlive() {
         return RobotsAlive;
@@ -322,7 +322,7 @@ public class Game {
     /**
      * Getter
      *
-     * @return visszaadja az életben levõ alienek listáját
+     * @return visszaadja az ï¿½letben levï¿½ alienek listï¿½jï¿½t
      */
     public ArrayList<Alien> getAliensAlive() {
         return AliensAlive;
