@@ -17,7 +17,12 @@
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-compiler-plugin</artifactId>
             <version>3.8.1</version>
-        </dependency>
+		<configuration>
+			<includes>
+				<include>**/*UnitTest.java</include>
+				</includes>
+			</configuration>
+		</dependency>
     </dependencies>
 
     <properties>
@@ -28,4 +33,8 @@
 		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
 	</properties>
 
+	
+	
+	
+	
 </project>
