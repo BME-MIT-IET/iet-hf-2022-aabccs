@@ -1,3 +1,4 @@
+
 import Model.*;
 import Model.Robot;
 import View.ViewController;
@@ -14,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class UnitTest {
 
     @Test
-    void TestSetNeighbours(){
+    public void TestSetNeighbours(){
         Game g = new Game();
         ViewController v = new ViewController();
 
@@ -41,7 +42,7 @@ public class UnitTest {
     }
 
     @Test
-    void TestSettlerCanMove(){
+    public void TestSettlerCanMove(){
 
         Asteroid a1 = new Asteroid();
         Asteroid a2 = new Asteroid();
@@ -63,7 +64,7 @@ public class UnitTest {
     }
 
     @Test
-    void TestNoNeighbour(){
+    public void TestNoNeighbour(){
         Game g = new Game();
         ViewController v = new ViewController();
 
@@ -89,7 +90,7 @@ public class UnitTest {
     }
 
     @Test
-    void TestTeleportSuccess(){
+    public void TestTeleportSuccess(){
         TeleportGate tg1 = new TeleportGate();
         TeleportGate tg2 = new TeleportGate();
 
@@ -107,7 +108,7 @@ public class UnitTest {
     }
 
     @Test
-    void TestTeleportFail(){
+    public void TestTeleportFail(){
         TeleportGate tg1 = new TeleportGate();
 
         tg1.SetActive();
@@ -119,7 +120,7 @@ public class UnitTest {
     }
 
     @Test
-    void TestWin(){
+    public void TestWin(){
 
         Game g = new Game();
         ViewController v = new ViewController();
@@ -165,7 +166,7 @@ public class UnitTest {
     }
 
     @Test
-    void TestMineSuccessful(){
+    public void TestMineSuccessful(){
         Asteroid a1 = new Asteroid();
         a1.setNumberOfLayers(0);
         Iron iron = new Iron();
@@ -180,7 +181,7 @@ public class UnitTest {
     }
 
     @Test
-    void TestNoSpaceInInventory(){
+    public void TestNoSpaceInInventory(){
 
         Asteroid a = new Asteroid();
         Coal c = new Coal();
@@ -201,7 +202,7 @@ public class UnitTest {
     }
 
     @Test
-    void TestAsteroidIsEmpty(){
+    public void TestAsteroidIsEmpty(){
         Asteroid a1 = new Asteroid();
         a1.setNumberOfLayers(0);
 
@@ -213,7 +214,7 @@ public class UnitTest {
     }
 
     @Test
-    void TestMineOnTeleportGate(){
+    public void TestMineOnTeleportGate(){
 
         TeleportGate t = new TeleportGate();
         Settler s = new Settler(t);
@@ -225,7 +226,7 @@ public class UnitTest {
     }
 
     @Test
-    void TestMineButLayerGreaterThanZero(){
+    public void TestMineButLayerGreaterThanZero(){
         Asteroid a1 = new Asteroid();
         Iron iron = new Iron();
         a1.SetMaterialInside(iron);
@@ -239,7 +240,7 @@ public class UnitTest {
     }
 
     @Test
-    void TestSettlerCanBuildTeleportGate(){
+    public void TestSettlerCanBuildTeleportGate(){
         Game g = new Game();
         ViewController v = new ViewController();
         g.setViewController(v);
@@ -275,7 +276,7 @@ public class UnitTest {
     }
 
     @Test
-    void TestSettlerCanNotBuildTeleportGate (){
+    public void TestSettlerCanNotBuildTeleportGate (){
         Asteroid a1 = new Asteroid();
         a1.setNumberOfLayers(0);
 
@@ -286,7 +287,7 @@ public class UnitTest {
     }
 
     @Test
-    void TestSettlerCanBuildRobot(){
+    public void TestSettlerCanBuildRobot(){
 
         Iron i = new Iron();
         Coal c = new Coal();
@@ -316,7 +317,7 @@ public class UnitTest {
     }
 
     @Test
-    void TestSettlerCanNotBuildRobot(){
+    public void TestSettlerCanNotBuildRobot(){
 
         Game g = new Game();
         ViewController v = new ViewController();
@@ -336,7 +337,7 @@ public class UnitTest {
     }
 
     @Test
-    void TestHideSuccess(){
+    public void TestHideSuccess(){
 
         Asteroid a = new Asteroid();
         a.setNumberOfLayers(0);
@@ -353,7 +354,7 @@ public class UnitTest {
     }
 
     @Test
-    void TestHideFailNumberOfLayersGreaterThanZero(){
+    public void TestHideFailNumberOfLayersGreaterThanZero(){
         Asteroid a = new Asteroid();
         a.setNumberOfLayers(1);
 
@@ -367,7 +368,7 @@ public class UnitTest {
     }
 
     @Test
-    void TestHideFailNotEmpty(){
+    public void TestHideFailNotEmpty(){
 
         Iron i = new Iron();
         Asteroid a = new Asteroid();
@@ -386,7 +387,7 @@ public class UnitTest {
     }
 
     @Test
-    void TestComingOut(){
+    public void TestComingOut(){
         Asteroid a = new Asteroid();
         a.setNumberOfLayers(0);
 
@@ -405,7 +406,7 @@ public class UnitTest {
     }
 
     @Test
-    void TestPlaceMaterialSuccess(){
+    public void TestPlaceMaterialSuccess(){
 
         Asteroid a = new Asteroid();
         a.setNumberOfLayers(0);
@@ -422,7 +423,7 @@ public class UnitTest {
     }
 
     @Test
-    void TestPlaceMaterialFailNumberOfLayersGreaterThanZero(){
+    public void TestPlaceMaterialFailNumberOfLayersGreaterThanZero(){
 
         Iron i = new Iron();
         Asteroid a = new Asteroid();
@@ -438,7 +439,7 @@ public class UnitTest {
     }
 
     @Test
-    void TestPlaceMaterialFailNotEmpty(){
+    public void TestPlaceMaterialFailNotEmpty(){
 
         Iron i1 = new Iron();
         Iron i2 = new Iron();
@@ -457,7 +458,7 @@ public class UnitTest {
     }
 
     @Test
-    void TestPlaceMaterialFailNotOnAsteroid(){
+    public void TestPlaceMaterialFailNotOnAsteroid(){
 
         Iron i = new Iron();
         TeleportGate tg = new TeleportGate();
@@ -471,7 +472,7 @@ public class UnitTest {
     }
 
     @Test
-    void TestPlaceTeleportGate(){
+    public void TestPlaceTeleportGate(){
         Game g = new Game();
         ViewController v = new ViewController();
         g.setViewController(v);
@@ -494,7 +495,7 @@ public class UnitTest {
     }
 
     @Test
-    void TestDrillIsPossible(){
+    public void TestDrillIsPossible(){
 
         Asteroid a = new Asteroid();
         a.setNumberOfLayers(2);
@@ -509,7 +510,7 @@ public class UnitTest {
     }
 
     @Test
-    void TestDrillButNumberOfLayersEqualsZero(){
+    public void TestDrillButNumberOfLayersEqualsZero(){
 
         Asteroid a = new Asteroid();
         Settler s = new Settler(a);
@@ -524,7 +525,7 @@ public class UnitTest {
     }
 
     @Test
-    void TestDrillAndMaterialExposed(){
+    public void TestDrillAndMaterialExposed(){
         Uran u = new Uran();
         u.SetCounter(0);
         Asteroid a = new Asteroid();
@@ -540,7 +541,7 @@ public class UnitTest {
     }
 
     @Test
-    void TestDrillOnTeleportGate(){
+    public void TestDrillOnTeleportGate(){
 
         TeleportGate tg = new TeleportGate();
         Settler s = new Settler(tg);
@@ -555,7 +556,7 @@ public class UnitTest {
     }
 
     @Test
-    void TestWaterSublimes(){
+    public void TestWaterSublimes(){
         Water w = new Water();
         Asteroid a = new Asteroid();
         a.setNearSun(true);
@@ -569,7 +570,7 @@ public class UnitTest {
     }
 
     @Test
-    void TestUranExplodes(){
+    public void TestUranExplodes(){
         Game g = new Game();
         ViewController v = new ViewController();
         g.setViewController(v);
@@ -591,7 +592,7 @@ public class UnitTest {
     }
 
     @Test
-    void TestRobotExplodes(){
+    public void TestRobotExplodes(){
         Game g = new Game();
         ViewController v = new ViewController();
         g.setViewController(v);
@@ -618,7 +619,7 @@ public class UnitTest {
     }
 
     @Test
-    void TestRobotExplodesNoNeighbour(){
+    public void TestRobotExplodesNoNeighbour(){
 
         Game g = new Game();
         ViewController v = new ViewController();
@@ -641,7 +642,7 @@ public class UnitTest {
     }
 
     @Test
-    void TestAsteroidExplodesWithSettler(){
+    public void TestAsteroidExplodesWithSettler(){
 
         Game g = new Game();
         ViewController v = new ViewController();
@@ -672,7 +673,7 @@ public class UnitTest {
     }
 
     @Test
-    void TestSunStorm(){
+    public void TestSunStorm(){
 
         Game g = new Game();
         ViewController v = new ViewController();
@@ -705,7 +706,7 @@ public class UnitTest {
     }
 
     @Test
-    void TestNotLastSettlerDies(){
+    public void TestNotLastSettlerDies(){
         Game g = new Game();
         ViewController v = new ViewController();
         g.setViewController(v);
@@ -728,7 +729,7 @@ public class UnitTest {
     }
 
     @Test
-    void TestLose(){
+    public void TestLose(){
 
         Game g = new Game();
         ViewController v = new ViewController();
@@ -749,7 +750,7 @@ public class UnitTest {
     }
 
     @Test
-    void TestRobotDies(){
+    public void TestRobotDies(){
 
         Game g = new Game();
         ViewController v = new ViewController();
