@@ -10,6 +10,6 @@
 
 
 ## Tanulságok
-- Sok hibára fény derülhet csupán azáltal, hogy a kódot végig nézzük, mert könnyebben észrevehetőek logikai bukfencek (pl logikátlan függvény-szekvenciák), a konvenciók követésének hiányosságai (pl setter függvények megjelennek kis és nagy kezdőbetűvel is), illetve egyszerűsítési lehetőségek (pl kódblokkok függvénybe szervezése)
+- Sok hibára fény derülhet csupán azáltal, hogy a kódot végignézzük, mert könnyebben észrevehetőek logikai bukfencek (pl logikátlan függvény-szekvenciák), a konvenciók követésének hiányosságai (pl setter függvények megjelennek kis és nagy kezdőbetűvel is), illetve egyszerűsítési lehetőségek (pl kódblokkok függvénybe szervezése)
 - A változtatásokat jó, ha egy külön ember átnézi, ugyanis a javításokat látva felmerülhetnek benne olyan értelmező kérdések, melyekre a commit-oló esetleg nem is gondolt. Ezáltal esetleges hibák kiszürhetők, illetve jobb megoldásokra juthatunk.
 - A GitHub platform nagyban megkönnyíti az egyértelmű kommunikációt az intuitív felhasználói felületével, érdemes ezt vagy más hasonló rendszert alkalmazni ilyen feladatokra.
