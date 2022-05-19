@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -170,7 +169,7 @@ public class UnitTest {
         Asteroid a1 = new Asteroid();
         a1.setNumberOfLayers(0);
         Iron iron = new Iron();
-        a1.SetMaterialInside(iron);
+        a1.setMaterialInside(iron);
 
         Settler settler = new Settler(a1);
 
@@ -185,7 +184,7 @@ public class UnitTest {
 
         Asteroid a = new Asteroid();
         Coal c = new Coal();
-        a.SetMaterialInside(c);
+        a.setMaterialInside(c);
 
         Settler s = new Settler(a);
         for(int i = 0; i < 10; i++){
@@ -229,7 +228,7 @@ public class UnitTest {
     public void TestMineButLayerGreaterThanZero(){
         Asteroid a1 = new Asteroid();
         Iron iron = new Iron();
-        a1.SetMaterialInside(iron);
+        a1.setMaterialInside(iron);
         a1.setNumberOfLayers(2);
 
         Settler settler = new Settler(a1);
@@ -346,7 +345,7 @@ public class UnitTest {
 
         s.Hide();
 
-        assertEquals(s, a.GetEntityInside());
+        assertEquals(s, a.getEntityInside());
         assertFalse(a.getEntitiesOnSurface().contains(s));
 
 
@@ -362,7 +361,7 @@ public class UnitTest {
 
         s.Hide();
 
-        assertNotEquals(s, a.GetEntityInside());
+        assertNotEquals(s, a.getEntityInside());
         assertTrue(a.getEntitiesOnSurface().contains(s));
 
     }
@@ -373,13 +372,13 @@ public class UnitTest {
         Iron i = new Iron();
         Asteroid a = new Asteroid();
         a.setNumberOfLayers(0);
-        a.SetMaterialInside(i);
+        a.setMaterialInside(i);
         Settler s = new Settler(a);
 
         s.Hide();
 
-        assertNotEquals(s, a.GetEntityInside());
-        assertNull(a.GetEntityInside());
+        assertNotEquals(s, a.getEntityInside());
+        assertNull(a.getEntityInside());
         assertTrue(a.getEntitiesOnSurface().contains(s));
 
 
@@ -395,12 +394,12 @@ public class UnitTest {
 
         s.Hide();
 
-        assertEquals(s, a.GetEntityInside());
+        assertEquals(s, a.getEntityInside());
         assertFalse(a.getEntitiesOnSurface().contains(s));
 
         s.Hide();
 
-        assertNotEquals(s, a.GetEntityInside());
+        assertNotEquals(s, a.getEntityInside());
         assertTrue(a.getEntitiesOnSurface().contains(s));
 
     }
@@ -444,7 +443,7 @@ public class UnitTest {
         Iron i1 = new Iron();
         Iron i2 = new Iron();
         Asteroid a = new Asteroid();
-        a.SetMaterialInside(i1);
+        a.setMaterialInside(i1);
         Settler s = new Settler(a);
         s.AddMaterial(i2);
         s.PlaceMaterial(i2);
@@ -531,7 +530,7 @@ public class UnitTest {
         Asteroid a = new Asteroid();
         a.setNearSun(true);
         a.setNumberOfLayers(1);
-        a.SetMaterialInside(u);
+        a.setMaterialInside(u);
         Settler s = new Settler(a);
 
         s.Drill();
@@ -561,7 +560,7 @@ public class UnitTest {
         Asteroid a = new Asteroid();
         a.setNearSun(true);
         a.setNumberOfLayers(1);
-        a.SetMaterialInside(w);
+        a.setMaterialInside(w);
         Settler s = new Settler(a);
 
         s.Drill();
@@ -685,7 +684,7 @@ public class UnitTest {
 
         Asteroid a = new Asteroid(sp);
         a.setNumberOfLayers(0);
-        a.SetMaterialInside(null);
+        a.setMaterialInside(null);
 
         Settler s = new Settler(a, g);
         Robot r = new Robot(a, g);
@@ -699,7 +698,7 @@ public class UnitTest {
 
         assertFalse(g.getRobotsAlive().contains(r));
         assertTrue(g.getSettlersAlive().contains(s));
-        assertEquals(s,a.GetEntityInside());
+        assertEquals(s,a.getEntityInside());
         assertFalse(a.getEntitiesOnSurface().contains(r));
 
 

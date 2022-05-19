@@ -3,16 +3,16 @@ import Control.MenuController;
 import Model.Game;
 import View.ViewController;
 
-import javax.swing.*;
 import java.io.*;
 
-//A tesztelÈst vezÈrlı fıprogram oszt·lya
+//A tesztel√©st vez√©rl≈ë f≈ëprogram oszt√°lya
 public class Main {
 
 	private static MenuController menuController;
 	private static Game game;
 	private static Control control;
 	private static ViewController viewController;
+
 
 	public static void main(String args[]) throws IOException {
 
@@ -23,7 +23,7 @@ public class Main {
 			try{
 				Thread.sleep(1000);
 			}catch (Exception e){
-
+				System.out.println(e);
 			}
 
 		}
@@ -42,7 +42,7 @@ public class Main {
 			viewController.setControl(control);
 			viewController.setGame(game);
 
-			control.Initialize();
+			control.initialize();
 			try {
 				Thread.sleep(100);
 			} catch (InterruptedException e) {

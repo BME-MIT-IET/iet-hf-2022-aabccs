@@ -1,6 +1,5 @@
 package Model;
 
-import View.AlienView;
 import View.AsteroidView;
 
 //Egy aszteroid�t reprezent�l� oszt�ly
@@ -9,8 +8,8 @@ public class Asteroid extends Location{
     private static int stat_id = 0;
 
     //Birtokl�sok
-    private Entity EntityInside;
-    private Material MaterialInside;
+    private Entity entityInside;
+    private Material materialInside;
 
     private int id;
 
@@ -76,13 +75,14 @@ public class Asteroid extends Location{
      * akkor a nyersanyag fedetlenn� v�lik,
      * megh�v�dik a MaterialInside Exposed f�ggv�nye
      */
+    @Override
     public void ReduceLayers() {
         if(NumberOfLayers <= 0){
             return;
         }
         NumberOfLayers--;
         if(NumberOfLayers <= 0 && GetMaterial() != null){
-            MaterialInside.Exposed(this);
+            materialInside.Exposed(this);
         }
     }
 
@@ -96,8 +96,9 @@ public class Asteroid extends Location{
      *
      * @param e A kib�jni-el�b�jni k�v�n� entit�s
      */
+    @Override
     public void Hide(Entity e) {
-        if(EntityInside == e){
+        if(entityInside == e){
             AddEntity(e);
             setEntityInside(null);
             return;
@@ -105,7 +106,7 @@ public class Asteroid extends Location{
         if (NumberOfLayers > 0){
             return;
         }
-        if (EntityInside != null || MaterialInside != null){
+        if (entityInside != null || materialInside != null){
             return;
         }
         setEntityInside(e);
@@ -123,14 +124,15 @@ public class Asteroid extends Location{
      * @param m Az elhelyezmi k�v�nt Model.Material
      * @return A m�velet sikeress�g�t mutatja
      */
+    @Override
     public boolean Place(Material m) {
         if(NumberOfLayers > 0){
             return false;
         }
-        if(EntityInside != null || MaterialInside != null){
+        if(entityInside != null || materialInside != null){
             return false;
         }
-        SetMaterialInside(m);
+        setMaterialInside(m);
         m.Exposed(this);
         return true;
     }
@@ -146,11 +148,12 @@ public class Asteroid extends Location{
      *
      * @return a magban tal�lhat� nyersanyag
      */
+    @Override
     public Material MineMaterialInside() {
         if(NumberOfLayers > 0){
             return null;
         }
-        Material tmp = MaterialInside;
+        Material tmp = materialInside;
         this.RemoveMaterial();
         return tmp;
     }
@@ -160,7 +163,7 @@ public class Asteroid extends Location{
      */
     @Override
     public void RemoveMaterial() {
-        MaterialInside = null;
+        materialInside = null;
     }
 
 
@@ -172,7 +175,7 @@ public class Asteroid extends Location{
      * @param entityInside erre �ll�tja be az EntityInside-ot
      */
     public void setEntityInside(Entity entityInside) {
-        EntityInside = entityInside;
+        this.entityInside = entityInside;
     }
 
     /**
@@ -180,24 +183,25 @@ public class Asteroid extends Location{
      *
      * @param m erre friss�ti a MaterialInside-ot
      */
-    public void SetMaterialInside(Material m) {
-        MaterialInside = m;
+    public void setMaterialInside(Material m) {
+        materialInside = m;
     }
 
     @Override
     public void Die(){
         super.Die();
-        EntityInside.Die();
+        entityInside.Die();
     }
 
     //Getterek
 
-    public Entity GetEntityInside(){
-        return EntityInside;
+    public Entity getEntityInside(){
+        return entityInside;
     }
 
+    @Override
     public Material GetMaterial(){
-        return MaterialInside;
+        return materialInside;
     }
 
     public String toString(){

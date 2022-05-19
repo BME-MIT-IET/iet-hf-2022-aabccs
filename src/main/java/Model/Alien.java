@@ -64,7 +64,7 @@ public class Alien extends Entity{
      */
     @Override
     public void Explode() {
-        if(location.GetNeighbours().size() == 0){
+        if(location.GetNeighbours().isEmpty()){
             Die();
             return;
         }
