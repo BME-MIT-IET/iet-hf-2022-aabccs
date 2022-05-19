@@ -51,7 +51,7 @@ public class Control extends JFrame{
     /**
      * Inicializálás
      */
-    public void Initialize(){
+    public void initialize(){
 
         canvas = new Canvas();
 
@@ -62,10 +62,10 @@ public class Control extends JFrame{
         this.add(buttonPanel, BorderLayout.SOUTH);
         this.add(canvas, BorderLayout.CENTER);
 
-        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        this.setExtendedState(java.awt.Frame.MAXIMIZED_BOTH);
         this.setResizable(false);
         this.setUndecorated(true);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
 
@@ -81,23 +81,23 @@ public class Control extends JFrame{
         listPanel.setBackground(Color.black);
         listPanel.setBorder(new LineBorder(new Color(168, 114, 208), 5));
 
-        materialListModel = new DefaultListModel<Material>();
-        teleportGateListModel = new DefaultListModel<TeleportGate>();
-        neighbourListModel = new DefaultListModel<Location>();
+        materialListModel = new DefaultListModel<>();
+        teleportGateListModel = new DefaultListModel<>();
+        neighbourListModel = new DefaultListModel<>();
 
-        teleportGateList = new JList<TeleportGate>();
+        teleportGateList = new JList<>();
         teleportGateList.setBackground(Color.BLACK);
         teleportGateList.setForeground(Color.white);
         teleportGateList.setSelectionBackground(new Color(168, 114, 208));
         teleportGateList.setSelectionForeground(Color.BLACK);
 
-        materialList = new JList<Material>();
+        materialList = new JList<>();
         materialList.setBackground(Color.BLACK);
         materialList.setForeground(Color.white);
         materialList.setSelectionBackground(new Color(168, 114, 208));
         materialList.setSelectionForeground(Color.BLACK);
 
-        neighbourList = new JList<Location>();
+        neighbourList = new JList<>();
         neighbourList.setBackground(Color.BLACK);
         neighbourList.setForeground(Color.white);
         neighbourList.setSelectionBackground(new Color(168, 114, 208));
@@ -244,6 +244,7 @@ public class Control extends JFrame{
          */
         moveButton.addMouseListener(new java.awt.event.MouseAdapter()
         {
+            @Override
             public void mousePressed(java.awt.event.MouseEvent evt)
             {
                 if(game.getCurrentSettler() == null) return;
@@ -260,6 +261,7 @@ public class Control extends JFrame{
          */
         mineButton.addMouseListener(new java.awt.event.MouseAdapter()
         {
+            @Override
             public void mousePressed(java.awt.event.MouseEvent evt)
             {
                 if(game.getCurrentSettler() == null) return;
@@ -273,6 +275,7 @@ public class Control extends JFrame{
          */
         hideButton.addMouseListener(new java.awt.event.MouseAdapter()
         {
+            @Override
             public void mousePressed(java.awt.event.MouseEvent evt)
             {
                 if(game.getCurrentSettler() == null) return;
@@ -286,6 +289,7 @@ public class Control extends JFrame{
          */
         placeButton.addMouseListener(new java.awt.event.MouseAdapter()
         {
+            @Override
             public void mousePressed(java.awt.event.MouseEvent evt)
             {
                 if(game.getCurrentSettler() == null) return;
@@ -304,6 +308,7 @@ public class Control extends JFrame{
          */
         drillButton.addMouseListener(new java.awt.event.MouseAdapter()
         {
+            @Override
             public void mousePressed(java.awt.event.MouseEvent evt)
             {
                 if(game.getCurrentSettler() == null) return;
@@ -317,6 +322,7 @@ public class Control extends JFrame{
          */
         teleportButton.addMouseListener(new java.awt.event.MouseAdapter()
         {
+            @Override
             public void mousePressed(java.awt.event.MouseEvent evt)
             {
                 if(game.getCurrentSettler() == null) return;
@@ -330,6 +336,7 @@ public class Control extends JFrame{
          */
         buildRobotButton.addMouseListener(new java.awt.event.MouseAdapter()
         {
+            @Override
             public void mousePressed(java.awt.event.MouseEvent evt)
             {
                 if(game.getCurrentSettler() == null) return;
@@ -343,6 +350,7 @@ public class Control extends JFrame{
          */
         buildTeleportGateButton.addMouseListener(new java.awt.event.MouseAdapter()
         {
+            @Override
             public void mousePressed(java.awt.event.MouseEvent evt)
             {
                 if(game.getCurrentSettler() == null) return;
@@ -356,6 +364,7 @@ public class Control extends JFrame{
          */
         exitButton.addMouseListener(new java.awt.event.MouseAdapter()
         {
+            @Override
             public void mousePressed(java.awt.event.MouseEvent evt)
             {
                 game.EndGame();
@@ -409,6 +418,10 @@ public class Control extends JFrame{
                 viewController.DrawAll();
             }
 
+
+            /**
+            * Interfész implementálás miatt üres
+            */
             @Override
             public void mouseMoved(MouseEvent e) {
 

@@ -69,19 +69,19 @@ public class Game {
             a.setNumberOfLayers(random.nextInt(5));
             int p = random.nextInt(100);
             if(p <= 20){
-                a.SetMaterialInside(new Iron());
+                a.setMaterialInside(new Iron());
             }
             else if(p <= 40){
-                a.SetMaterialInside(new Coal());
+                a.setMaterialInside(new Coal());
             }
             else if(p <= 60){
-                a.SetMaterialInside(new Water());
+                a.setMaterialInside(new Water());
             }
             else if(p <= 80){
-                a.SetMaterialInside(new Uran());
+                a.setMaterialInside(new Uran());
             }
             else{
-                a.SetMaterialInside(null);
+                a.setMaterialInside(null);
             }
 
             p = random.nextInt(100);

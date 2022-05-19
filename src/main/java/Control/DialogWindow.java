@@ -27,6 +27,7 @@ public class DialogWindow extends JFrame {
         JButton okButton = new JButton("OK");
         okButton.addMouseListener(new java.awt.event.MouseAdapter()
         {
+            @Override
             public void mousePressed(java.awt.event.MouseEvent evt)
             {
                 try{
